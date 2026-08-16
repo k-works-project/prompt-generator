@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="ja">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>プロンプト自動生成ツール(ポートフォリオ版)</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>プロンプト自動生成ツール</h1>
+    <p>右の項目を入力するだけで、AIに伝わりやすい構造化プロンプトを自動作成します。</p>
+  </header>
+
+  <main class="container">
+    <!-- 入力フォームエリア -->
+    <section class="form-section">
+<div class="form-group">
+        <label for="role">1. 設定<span class="sub-label">（なりきってほしい立場）</span></label>
+        <input type="text" id="role" value="ITに詳しい人" placeholder="例: プロのWebライター、ベテランエンジニア">
+      </div>
+
+      <div class="form-group">
+        <label for="task">2. 依頼<span class="sub-label">（具体的に作成してほしいもの）</span> <span class="required">必須</span></label>
+        <textarea id="task" rows="3" placeholder="例: wav音源のフル書き起こしを正しく行ってください">打合せメモを議事録っぽくまとめてほしい</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="context">3. 前提<span class="sub-label">（知っておいてほしい前提情報）</span></label>
+        <textarea id="context" rows="3" placeholder="例: ターゲットは20代後半の社会人。">社内のいつもの週次会議のメモ。マネージャー1人と開発3人が出席。</textarea>
+      </div>
+
+      <div class="form-group">
+        <label for="constraints">4. 条件<span class="sub-label">（文字数や口調などの指定）</span></label>
+        <textarea id="constraints" rows="5" placeholder="1行に1つの条件を入力してください">決まったこととToDoを分ける
+誰のタスクか書く
+用語はそのまま</textarea>
+      </div>
+
+      <div class="form-group">
+        <label>追加オプション（自動ルール適用）</label>
+        <div class="checkbox-group">
+          <label><input type="checkbox" id="optStrict" value="verbatim"> 忠実に出力（要約・脚色・修正を行わない）</label>
+          <label><input type="checkbox" id="optFix" value="fix" checked> 誤字脱字・表記揺れを補正する</label>
+          <label><input type="checkbox" id="optRewrite" value="rewrite"> 読みやすい文章にリライトする</label>
+          <label><input type="checkbox" id="optResultOnly" value="resultOnly" checked> 余計な挨拶や解説を省き、結果のみ出力する</label>
+          <label><input type="checkbox" id="optFiller" value="filler"> ケバ取りを行う（「えー」「あの」などを除去）</label>
+          <label><input type="checkbox" id="optNoTimestamp" value="noTimestamp"> タイムスタンプを付与しない</label>
+        </div>
+      </div>
+
+      <div class="form-group">
+        <label for="format">5. 出力<span class="sub-label">（箇条書き・表などの形式）</span></label>
+        <input type="text" id="format" value="箇条書き" placeholder="例: 箇条書き、表形式">
+      </div>
+    </section>
+
+    <!-- プレビュー＆操作エリア -->
+    <section class="preview-section">
+      <h2>完成したプロンプト</h2>
+      <div class="output-box">
+        <pre id="promptPreview"></pre>
+      </div>
+      <div class="btn-group">
+        <button id="copyBtn" class="btn primary">プロンプトをコピー</button>
+        <button id="resetBtn" class="btn secondary">リセット</button>
+      </div>
+    </section>
+  </main>
+
+  <!-- 同じ portfolio フォルダ内の app-demo.js を読み込む -->
+  <script src="./app-demo.js"></script>
+</body>
+</html>
